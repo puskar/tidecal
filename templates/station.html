@@ -1,6 +1,12 @@
 Enter the <a href="https://tidesandcurrents.noaa.gov">Station ID</a>:
 
-<form method="POST">
-    <input name="station_id">
-    <input type="submit">
-</form>
+<input type="text" id="station_id">
+
+<button onclick="getCal()">Search</button>
+
+<script>
+    function getCal(){
+        x=document.getElementById("station_id").value;
+        location.href= '/tidecal/'+encodeURIComponent(x);
+    }
+</script>
