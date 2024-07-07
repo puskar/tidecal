@@ -38,6 +38,7 @@ parser = argparse.ArgumentParser(prog='tidecal',
 8517394 - Barren Island, Rockaway Inlet
 8532337 - Belmar, NJ
 8515186 - Fire Island
+8534772 - Ventnor Pier, NJ
 
 Find more stations at https://tidesandcurrents.noaa.gov/'''
                                  )
@@ -83,7 +84,7 @@ def get_tide_ics(station):
   cal = Calendar()
   #cal.add('prodid', '-//my tide script')
   #cal.add('version', '0.99')
-  cal.add('X-WR-CALNAME', f'{locname}, {locstate}')
+  cal.add('X-WR-CALNAME', f'{locname.title()}, {locstate.upper()}')
   
   for forecast in tides['predictions']:
     time = forecast['t']
@@ -98,7 +99,7 @@ def get_tide_ics(station):
     event['dtstart'] = d
     event['summary'] = longt
     event['dtend'] = d
-    event['location'] = f"{locname}, {locstate}"
+    event['location'] = f"{locname.title()}, {locstate.upper()}"
     cal.add_component(event)
   response=make_response(cal.to_ical().decode('utf-8'))
   response.headers['Content-Type'] = 'text/calendar'
